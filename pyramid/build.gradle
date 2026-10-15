@@ -25,6 +25,7 @@ android {
                 install "cachetools"
                 install 'pycryptodome'
                 install 'beautifulsoup4'
+                install "cssselect==1.1.0"   // <-- 加这一行
             }
         }
     }
