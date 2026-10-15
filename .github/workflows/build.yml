@@ -16,6 +16,16 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.8'
+
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install lxml ujson pyquery requests jsonpath cachetools pycryptodome beautifulsoup4
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
