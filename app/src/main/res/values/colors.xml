@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_6200EE">#6200EE</color>
-    <color name="color_3700B3">#3700B3</color>
-    <color name="color_03DAC5">#03DAC5</color>
-    <color name="title_fouse_n">#ffce7900</color>
-    <color name="color_1890FF">#1890FF</color>
-    <color name="color_FFB800">#FF6600</color>
-    <color name="color_00FF0A">#00FF0A</color>
-    <color name="color_CBF46A">#CBF46A</color>
-    <color name="color_FF90CA09">#90CA09</color>
-    <color name="color_BD0CADE2">#BD0CADE2</color>
-    <color name="color_FF0057">#FF0057</color>
-    <color name="color_FF5F00">#FF5F00</color>
-    <color name="color_FFB6C1">#FFB6C1</color>
-    <color name="color_3D3D3D">#3D3D3D</color>
-    <color name="color_32364E">#32364E</color>
-    <color name="color_6632364E">#6632364E</color>
-    <color name="color_CCFFFFFF">#BBFFFFFF</color>
-    <color name="color_0CADE2">#0CADE2</color>
-    <color name="color_6CFFFFFF">#6CFFFFFF</color>
-    <color name="color_66000000">#66000000</color>
-    <color name="color_99000000">#99000000</color>
-    <color name="color_FFFFFF_50">#80FFFFFF</color>
-    <color name="color_CC000000">#CC000000</color>
-    <color name="color_000000_30">#48000000</color>
-    <color name="color_02F8E1">#02F8E1</color>
-    <color name="color_353744">#353744</color>
-    <color name="color_CC353744">#CC353744</color>
-    <color name="color_6C3D3D3D">#6c3d3d3d</color>
-    <color name="color_BBFFFFFF">#bbffffff</color>
-    <color name="color_FFFFFF">#ffffffff</color>
-    <color name="color_33FFFFFF">#33ffffff</color>
-    <color name="color_99FFFFFF">#4D000000</color>
-    <color name="color_59353744">#59353744</color>
-    <color name="color_80FF0057">#66FF0057</color>
-    <color name="color_000000_60">#99000000</color>
-    <color name="color_dialog_bg">#88000000</color>
-    <color name="color_scrollview_bg">#44000000</color>
-    <color name="color_text_primary">#FFFFFAE0</color>
-
-
-
+    <!-- 主色调：科技蓝 -->
+    <color name="color_6200EE">#0A84FF</color>
+    <!-- 主色深色变体：深海蓝 -->
+    <color name="color_3700B3">#0066CC</color>
+    <!-- 强调色：清新绿 -->
+    <color name="color_03DAC5">#32D74B</color>
+    <!-- 标题焦点高亮：暖金色（遥控器选中时的颜色） -->
+    <color name="title_fouse_n">#FFD60A</color>
+    <!-- 链接/按钮蓝 -->
+    <color name="color_1890FF">#0A84FF</color>
+    <!-- 警告/高亮红 -->
+    <color name="color_FFB800">#FF453A</color>
+    <!-- 成功绿 -->
+    <color name="color_00FF0A">#32D74B</color>
+    <!-- 一级表面色：深灰（卡片背景） -->
+    <color name="color_CBF46A">#2C2C2E</color>
+    <!-- 二级表面色：中灰（分隔线、次要背景） -->
+    <color name="color_90CA09">#3A3A3C</color>
+    <!-- 三级表面色：浅灰（禁用状态） -->
+    <color name="color_B0DCADE2">#48484A</color>
+    <!-- 黄色 -->
+    <color name="color_FFD57">#FFD60A</color>
+    <!-- 橙红色 -->
+    <color name="color_F5F00">#FF9F0A</color>
+    <!-- 红色 -->
+    <color name="color_FB6C1">#FF453A</color>
+    <!-- 极深背景：近黑色（主界面背景，OLED屏显示纯黑省电） -->
+    <color name="color_3D3D3D">#1C1C1E</color>
 </resources>
