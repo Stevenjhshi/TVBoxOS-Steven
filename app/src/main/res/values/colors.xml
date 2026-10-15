@@ -28,4 +28,8 @@
     <color name="color_FB6C1">#FF453A</color>
     <!-- 极深背景：近黑色（主界面背景，OLED屏显示纯黑省电） -->
     <color name="color_3D3D3D">#1C1C1E</color>
+    <color name="color_dialog_bg">#2C2C2E</color>
+    <color name="color_scrollview_bg">#1C1C1E</color>
+    <color name="color_66000000">#66000000</color>
+    <color name="color_button_detail_collect">#0A84FF</color>
 </resources>
