@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 主色调：科技蓝 -->
+    <!-- 主色：科技蓝 -->
     <color name="color_6200EE">#0A84FF</color>
-    <!-- 主色深色变体：深海蓝 -->
+    <!-- 主色深色变体 -->
     <color name="color_3700B3">#0066CC</color>
     <!-- 强调色：清新绿 -->
     <color name="color_03DAC5">#32D74B</color>
-    <!-- 标题焦点高亮：暖金色（遥控器选中时的颜色） -->
+    <!-- 标题焦点高亮：暖金色 -->
     <color name="title_fouse_n">#FFD60A</color>
     <!-- 链接/按钮蓝 -->
     <color name="color_1890FF">#0A84FF</color>
@@ -14,22 +14,26 @@
     <color name="color_FFB800">#FF453A</color>
     <!-- 成功绿 -->
     <color name="color_00FF0A">#32D74B</color>
-    <!-- 一级表面色：深灰（卡片背景） -->
+    <!-- 卡片/表面深色 -->
     <color name="color_CBF46A">#2C2C2E</color>
-    <!-- 二级表面色：中灰（分隔线、次要背景） -->
+    <!-- 分隔线/次要背景 -->
     <color name="color_90CA09">#3A3A3C</color>
-    <!-- 三级表面色：浅灰（禁用状态） -->
+    <!-- 禁用状态浅灰 -->
     <color name="color_B0DCADE2">#48484A</color>
     <!-- 黄色 -->
     <color name="color_FFD57">#FFD60A</color>
-    <!-- 橙红色 -->
+    <!-- 橙色 -->
     <color name="color_F5F00">#FF9F0A</color>
     <!-- 红色 -->
     <color name="color_FB6C1">#FF453A</color>
-    <!-- 极深背景：近黑色（主界面背景，OLED屏显示纯黑省电） -->
+    <!-- 极深背景 -->
     <color name="color_3D3D3D">#1C1C1E</color>
+
+    <!-- === 以下是原项目依赖但必须保留的基础颜色，不要删！ === -->
     <color name="color_dialog_bg">#2C2C2E</color>
     <color name="color_scrollview_bg">#1C1C1E</color>
     <color name="color_66000000">#66000000</color>
     <color name="color_button_detail_collect">#0A84FF</color>
+    <color name="color_FF0057">#FF453A</color>
+    <color name="color_FF5F00">#FF9F0A</color>
 </resources>
