@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -25,7 +23,6 @@ import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -33,11 +30,6 @@ import me.jessyan.autosize.AutoSizeCompat;
 import me.jessyan.autosize.internal.CustomAdapt;
 import xyz.doikki.videoplayer.util.CutoutUtil;
 
-/**
- * @author pj567
- * @date :2020/12/17
- * @description:
- */
 public abstract class BaseActivity extends AppCompatActivity implements CustomAdapt {
     protected Context mContext;
     private LoadService mLoadService;
@@ -60,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
         mContext = this;
-        CutoutUtil.adaptCutoutAboveAndroidP(mContext, true);//设置刘海
+        CutoutUtil.adaptCutoutAboveAndroidP(mContext, true);
         AppManager.getInstance().addActivity(this);
         init();
     }
@@ -185,45 +177,15 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
         return !(screenRatio >= 4.0f);
     }
 
-    protected static BitmapDrawable globalWp = null;
-
+    /**
+     * ★ 已简化：不再加载自定义壁纸，统一使用深灰背景。
+     *   原来这个方法是导致搜索页蓝色背景 + 闪退的元凶。
+     */
     public void changeWallpaper(boolean force) {
-        if (!force && globalWp != null)
-            getWindow().setBackgroundDrawable(globalWp);
         try {
-            File wp = new File(getFilesDir().getAbsolutePath() + "/wp");
-            if (wp.exists()) {
-                BitmapFactory.Options opts = new BitmapFactory.Options();
-                opts.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(wp.getAbsolutePath(), opts);
-                // 从Options中获取图片的分辨率
-                int imageHeight = opts.outHeight;
-                int imageWidth = opts.outWidth;
-                int picHeight = 720;
-                int picWidth = 1080;
-                int scaleX = imageWidth / picWidth;
-                int scaleY = imageHeight / picHeight;
-                int scale = 1;
-                if (scaleX > scaleY && scaleY >= 1) {
-                    scale = scaleX;
-                }
-                if (scaleX < scaleY && scaleX >= 1) {
-                    scale = scaleY;
-                }
-                opts.inJustDecodeBounds = false;
-                // 采样率
-                opts.inSampleSize = scale;
-                globalWp = new BitmapDrawable(BitmapFactory.decodeFile(wp.getAbsolutePath(), opts));
-            } else {
-                globalWp = null;
-            }
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            globalWp = null;
+            getWindow().setBackgroundDrawableResource(R.color.color_3D3D3D);
+        } catch (Throwable th) {
+            th.printStackTrace();
         }
-        if (globalWp != null)
-            getWindow().setBackgroundDrawable(globalWp);
-        else
-            getWindow().setBackgroundDrawableResource(R.drawable.app_bg);
     }
 }
