@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ===== 底层：图片（想用纯色时，把这一段注释掉即可） ===== -->
+    <item>
+        <bitmap
+            android:src="@drawable/app_bg"
+            android:gravity="fill" />
+    </item>
+
+    <!-- ===== 上层：颜色遮罩 ===== -->
+    <!-- alpha="0.0" = 完全显示图片；alpha="1.0" = 完全显示颜色 -->
+    <!-- 推荐 0.5~0.85 之间，既能保留图片质感，又能统一色调 -->
+    <item android:alpha="0.85">
+        <color android:color="@color/color_3D3D3D" />
+    </item>
+
+</layer-list>
