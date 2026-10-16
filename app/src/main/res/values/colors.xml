@@ -4,49 +4,45 @@
     <color name="color_6200EE">#0A84FF</color>        <!-- 主色：科技蓝 -->
     <color name="color_3700B3">#0066CC</color>        <!-- 主色深：深海蓝 -->
     <color name="color_03DAC5">#32D74B</color>        <!-- 强调色：清新绿 -->
-    <color name="title_fouse_n">#FFD60A</color>       <!-- 焦点高亮：暖金色（遥控器选中） -->
+    <color name="title_fouse_n">#FFD60A</color>       <!-- 焦点高亮：暖金色 -->
     <color name="color_1890FF">#0A84FF</color>        <!-- 链接/按钮蓝 -->
-    <color name="color_FFB800">#FF453A</color>        <!-- 警告/高亮红 -->
+    <color name="color_FFB800">#0A84FF</color>        <!-- 原警告红 → 科技蓝 -->
     <color name="color_00FF0A">#32D74B</color>        <!-- 成功绿 -->
-    <color name="color_CBF46A">#2C2C2E</color>        <!-- 卡片/深灰表面 -->
+    <color name="color_CBF46A">#2C2C2E</color>        <!-- 卡片/深灰 -->
 
-    <!-- ==================== 原版其他颜色（只改值） ==================== -->
-    <color name="color_FF90CA09">#FFD60A</color>      <!-- 原黄色，改暖金 -->
+    <!-- ==================== 按钮主色：全部统一科技蓝 ==================== -->
+    <color name="color_FF5F00">#0A84FF</color>        <!-- 原按钮橙 → 科技蓝（核心！） -->
+    <color name="color_FF90CA09">#FFD60A</color>      <!-- 暖金焦点 -->
     <color name="color_BD0CADE2">#BD0A84FF</color>    <!-- 半透明科技蓝 -->
-    <color name="color_FF0057">#FF453A</color>        <!-- 红色 -->
-    <color name="color_FF5F00">#FF9F0A</color>        <!-- 橙色 -->
-    <color name="color_FFB6C1">#FF453A</color>        <!-- 粉红改红 -->
-    <color name="color_3D3D3D">#1C1C1E</color>        <!-- 背景：极深灰/近黑 -->
+    <color name="color_FF0057">#0A84FF</color>        <!-- 原红 → 科技蓝 -->
+    <color name="color_FFB6C1">#0A84FF</color>        <!-- 原粉红 → 科技蓝 -->
+    <color name="color_3D3D3D">#1C1C1E</color>        <!-- 背景：近黑 -->
     <color name="color_32364E">#2C2C2E</color>        <!-- 深灰表面 -->
     <color name="color_6632364E">#662C2C2E</color>    <!-- 半透明深灰 -->
-    
-    <!-- ==================== 白色系（保持原样，只是规范化大小写） ==================== -->
+
+    <!-- ==================== 白色系 ==================== -->
     <color name="color_CCFFFFFF">#CCFFFFFF</color>
-    <color name="color_0CADE2">#0A84FF</color>        <!-- 青色改为科技蓝 -->
+    <color name="color_0CADE2">#0A84FF</color>        <!-- 青色 → 科技蓝 -->
     <color name="color_6CFFFFFF">#6CFFFFFF</color>
     <color name="color_66000000">#66000000</color>
     <color name="color_99000000">#99000000</color>
     <color name="color_FFFFFF_50">#80FFFFFF</color>
     <color name="color_CC000000">#CC000000</color>
     <color name="color_000000_30">#48000000</color>
-    <color name="color_02F8E1">#0A84FF</color>        <!-- 青色改为科技蓝 -->
+    <color name="color_02F8E1">#0A84FF</color>        <!-- 青色 → 科技蓝 -->
     <color name="color_353744">#2C2C2E</color>        <!-- 深灰表面 -->
     <color name="color_CC353744">#CC2C2C2E</color>
     <color name="color_6C3D3D3D">#6C1C1C1E</color>    <!-- 半透明近黑 -->
     <color name="color_BBFFFFFF">#BBFFFFFF</color>
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_33FFFFFF">#33FFFFFF</color>
-    <color name="color_99FFFFFF">#4D000000</color>    <!-- 原值就是黑色半透明，保持不变 -->
-    
-    <!-- ==================== 特殊背景和文本颜色 ==================== -->
+    <color name="color_99FFFFFF">#4D000000</color>
+
+    <!-- ==================== 特殊背景 ==================== -->
     <color name="color_59353744">#592C2C2E</color>    <!-- 半透明深灰 -->
-    <color name="color_80FF0057">#66FF453A</color>    <!-- 半透明红 -->
+    <color name="color_80FF0057">#660A84FF</color>    <!-- 半透明红 → 半透明科技蓝 -->
     <color name="color_000000_60">#99000000</color>
-    
-    <!-- 对话框和滚动条背景（改成深色毛玻璃效果） -->
     <color name="color_dialog_bg">#CC1C1C1E</color>   <!-- 深色对话框 -->
-    <color name="color_scrollview_bg">#661C1C1E</color> <!-- 深色滚动背景 -->
-    
-    <!-- 主要文本颜色（改成纯白，在深色背景下最清晰） -->
+    <color name="color_scrollview_bg">#661C1C1E</color>
     <color name="color_text_primary">#FFFFFF</color>
 </resources>
