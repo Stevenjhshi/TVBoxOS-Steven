@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # 允许创建 Release
+  contents: write
 
 jobs:
   build:
@@ -29,11 +29,16 @@ jobs:
         python3 -m pip install --upgrade pip
         python3 -m pip install lxml ujson pyquery requests jsonpath cachetools pycryptodome beautifulsoup4 cssselect==1.1.0
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    # ★ 新增：云端生成 1x1 透明 PNG
+    - name: Create transparent app_bg.png
+      run: |
+        echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" | base64 -d > app/src/main/res/drawable/app_bg.png
 
     - name: Create local.properties
       run: echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
     - name: Build with Gradle
       run: ./gradlew assembleDebug --stacktrace --no-daemon
@@ -45,7 +50,6 @@ jobs:
         path: app/build/outputs/apk/**/*.apk
         if-no-files-found: warn
 
-    # 新增：发布到 Release，提供公开下载链接
     - name: Create Release
       uses: softprops/action-gh-release@v2
       with:
