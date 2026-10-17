@@ -96,16 +96,14 @@ public class GridFragment extends BaseLazyFragment {
     }
 
     private void changeView(String id, Boolean isFolder) {
-        // ★ 新增：防止数据为空导致闪退
         if (sortData == null) return;
-
         if (isFolder) {
-            this.sortData.flag = "1"; // 修改sortData.flag
+            this.sortData.flag = "1";
         } else {
-            this.sortData.flag = "2"; // 修改sortData.flag
+            this.sortData.flag = "2";
         }
         initView();
-        this.sortData.id = id; // 修改sortData.id为新的ID
+        this.sortData.id = id;
         initViewModel();
         initData();
     }
@@ -114,17 +112,14 @@ public class GridFragment extends BaseLazyFragment {
         return (getUITag() == '1');
     }
 
-    // 获取当前页面UI的显示模式 ‘0’ 正常模式 '1' 文件夹模式 '2' 显示缩略图的文件夹模式
     public char getUITag() {
         return (sortData == null || sortData.flag == null || sortData.flag.length() == 0) ? '0' : sortData.flag.charAt(0);
     }
 
-    // 是否允许聚合搜索 sortData.flag的第二个字符为‘1’时允许聚搜
     public boolean enableFastSearch() {
         return sortData.flag == null || sortData.flag.length() < 2 || (sortData.flag.charAt(1) == '1');
     }
 
-    // 保存当前页面
     private void saveCurrentView() {
         if (this.mGridView == null) return;
         GridInfo info = new GridInfo();
@@ -138,12 +133,11 @@ public class GridFragment extends BaseLazyFragment {
         this.mGrids.push(info);
     }
 
-    // 丢弃当前页面，将页面还原成上一个保存的页面
     public boolean restoreView() {
         if (mGrids.empty()) return false;
         this.showSuccess();
-        ((ViewGroup) mGridView.getParent()).removeView(this.mGridView); // 从父窗口移除当前控件
-        GridInfo info = mGrids.pop();// 还原上次保存的控件
+        ((ViewGroup) mGridView.getParent()).removeView(this.mGridView);
+        GridInfo info = mGrids.pop();
         this.sortData.id = info.sortID;
         this.mGridView = info.mGridView;
         this.gridAdapter = info.gridAdapter;
@@ -156,35 +150,46 @@ public class GridFragment extends BaseLazyFragment {
         return true;
     }
 
-    // 更改当前页面
     private void createView() {
         this.saveCurrentView(); // 保存当前页面
-        if (mGridView == null) { // 从layout中拿view
+        
+        // ★ 修复核心：先创建 Adapter
+        gridAdapter = new GridAdapter(isFolederMode());
+
+        if(mGridView == null){ // 从layout中拿view
             mGridView = findViewById(R.id.mGridView);
-        } else { // 复制当前view
+        }else{ // 复制当前view
             TvRecyclerView v3 = new TvRecyclerView(this.mContext);
-            v3.setSpacingWithMargins(10, 10);
+            v3.setSpacingWithMargins(10,10);
             v3.setLayoutParams(mGridView.getLayoutParams());
             v3.setPadding(mGridView.getPaddingLeft(), mGridView.getPaddingTop(), mGridView.getPaddingRight(), mGridView.getPaddingBottom());
             v3.setClipToPadding(mGridView.getClipToPadding());
+            
+            // ★ 修复核心：在 addView 之前，绝对必须先设置好 LayoutManager 和 Adapter
+            if(isFolederMode()){
+                v3.setLayoutManager(new V7LinearLayoutManager(this.mContext, 1, false));
+            }else{
+                v3.setLayoutManager(new V7GridLayoutManager(this.mContext, isBaseOnWidth() ? 5 : 6));
+            }
+            v3.setAdapter(gridAdapter);
+            
             ((ViewGroup) mGridView.getParent()).addView(v3);
             mGridView.setVisibility(View.GONE);
             mGridView = v3;
             mGridView.setVisibility(View.VISIBLE);
         }
         mGridView.setHasFixedSize(true);
-        gridAdapter = new GridAdapter(isFolederMode());
-        this.page = 1;
-        this.maxPage = 1;
+        this.page =1;
+        this.maxPage =1;
         this.isLoad = false;
     }
 
     private void initView() {
         this.createView();
         mGridView.setAdapter(gridAdapter);
-        if (isFolederMode()) {
+        if(isFolederMode()){
             mGridView.setLayoutManager(new V7LinearLayoutManager(this.mContext, 1, false));
-        } else {
+        }else{
             mGridView.setLayoutManager(new V7GridLayoutManager(this.mContext, isBaseOnWidth() ? 5 : 6));
         }
 
@@ -218,8 +223,6 @@ public class GridFragment extends BaseLazyFragment {
         mGridView.setOnInBorderKeyEventListener(new TvRecyclerView.OnInBorderKeyEventListener() {
             @Override
             public boolean onInBorderKeyEvent(int direction, View focused) {
-                if (direction == View.FOCUS_UP) {
-                }
                 return false;
             }
         });
@@ -252,7 +255,6 @@ public class GridFragment extends BaseLazyFragment {
                             jumpActivity(DetailActivity.class, bundle);
                         }
                     }
-
                 }
             }
         });
@@ -305,7 +307,7 @@ public class GridFragment extends BaseLazyFragment {
                 } else {
                     if (page == 1) {
                         showEmpty();
-                    } else if (page > 2) { // 只有一页数据时不提示
+                    } else if (page > 2) {
                         Toast.makeText(getContext(), "没有更多了", Toast.LENGTH_SHORT).show();
                     }
                     gridAdapter.loadMoreEnd();
@@ -316,11 +318,10 @@ public class GridFragment extends BaseLazyFragment {
     }
 
     public boolean isLoad() {
-        return isLoad || !mGrids.empty(); // 如果有缓存页的话也可以认为是加载了数据的
+        return isLoad || !mGrids.empty(); 
     }
 
     private void initData() {
-        // ★ 核心修复：这就是你日志里报错导致崩溃的那一行，如果为空，直接显示空状态并退出
         if (sortData == null) {
             showEmpty();
             return;
@@ -352,9 +353,7 @@ public class GridFragment extends BaseLazyFragment {
     }
 
     public void showFilter() {
-        // ★ 核心修复：如果 Context 为空，直接返回，防止 Dialog 创建崩溃
         if (getContext() == null) return;
-    
         if (sortData == null || sortData.filters == null) return;
 
         if (!sortData.filters.isEmpty() && gridFilterDialog == null) {
@@ -366,7 +365,6 @@ public class GridFragment extends BaseLazyFragment {
     }
 
     public void setFilterDialogData() {
-        // ★ 新增防护：防闪退
         if (sortData == null || sortData.filters == null) return;
 
         Context context = getContext();
@@ -375,7 +373,6 @@ public class GridFragment extends BaseLazyFragment {
         final int defaultColor = ContextCompat.getColor(context, R.color.color_FFFFFF);
         final int selectedColor = ContextCompat.getColor(context, R.color.color_02F8E1);
         
-        // 遍历过滤条件数据
         for (MovieSort.SortFilter filter : sortData.filters) {
             View line = inflater.inflate(R.layout.item_grid_filter, gridFilterDialog.filterRoot, false);
             TextView filterNameTv = line.findViewById(R.id.filterName);
@@ -390,15 +387,12 @@ public class GridFragment extends BaseLazyFragment {
             final ArrayList<String> keys = new ArrayList<>(filter.values.values());
             
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                // 用于记录上一次选中的 view
                 View previousSelectedView = null;
-                
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     String currentSelection = sortData.filterSelect.get(key);
                     String newSelection = keys.get(position);
                     if (currentSelection == null || !currentSelection.equals(newSelection)) {
-                        // 更新选中状态
                         sortData.filterSelect.put(key, newSelection);
                         updateViewStyle(view, selectedColor, true);
                         if (previousSelectedView != null) {
@@ -406,7 +400,6 @@ public class GridFragment extends BaseLazyFragment {
                         }
                         previousSelectedView = view;
                     } else {
-                        // 取消选中
                         sortData.filterSelect.remove(key);
                         if (previousSelectedView != null) {
                             updateViewStyle(previousSelectedView, defaultColor, false);
@@ -415,7 +408,6 @@ public class GridFragment extends BaseLazyFragment {
                     }
                     forceRefresh();
                 }
-                
                 private void updateViewStyle(View view, int color, boolean isBold) {
                     TextView valueTv = view.findViewById(R.id.filterValue);
                     valueTv.getPaint().setFakeBoldText(isBold);
