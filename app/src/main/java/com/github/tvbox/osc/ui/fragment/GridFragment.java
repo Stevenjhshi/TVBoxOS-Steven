@@ -352,11 +352,13 @@ public class GridFragment extends BaseLazyFragment {
     }
 
     public void showFilter() {
-        // ★ 新增防护：防闪退
+        // ★ 核心修复：如果 Context 为空，直接返回，防止 Dialog 创建崩溃
+        if (getContext() == null) return;
+    
         if (sortData == null || sortData.filters == null) return;
 
         if (!sortData.filters.isEmpty() && gridFilterDialog == null) {
-            gridFilterDialog = new GridFilterDialog(mContext);
+            gridFilterDialog = new GridFilterDialog(getContext());
             setFilterDialogData();
         }
         if (gridFilterDialog != null)
