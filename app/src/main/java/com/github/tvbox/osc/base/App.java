@@ -1,6 +1,7 @@
 package com.github.tvbox.osc.base;
 
 import android.app.Activity;
+import android.os.Process;
 import androidx.multidex.MultiDexApplication;
 
 import com.github.tvbox.osc.bean.VodInfo;
@@ -19,6 +20,13 @@ import com.github.tvbox.osc.util.js.JSEngine;
 import com.kingja.loadsir.core.LoadSir;
 import com.orhanobut.hawk.Hawk;
 import com.p2p.P2PClass;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.unit.Subunits;
@@ -39,6 +47,10 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        
+        // ★ 新增：全局崩溃捕获
+        initCrashHandler();
+        
         initParams();
         // OKGo
         OkGoHelper.init(); //台标获取
@@ -58,6 +70,38 @@ public class App extends MultiDexApplication {
         PlayerHelper.init();
         JSEngine.getInstance().create();
         FileUtils.cleanPlayerCache();
+    }
+
+    // ★ 新增：将崩溃信息写入到本地文件的方法
+    private void initCrashHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) {
+                try {
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    ex.printStackTrace(pw);
+                    String crashLog = sw.toString();
+
+                    // 保存路径：内部存储/Android/data/包名/files/crash_log.txt
+                    File dir = getExternalFilesDir(null);
+                    if (dir != null) {
+                        File logFile = new File(dir, "crash_log.txt");
+                        FileWriter fw = new FileWriter(logFile, true);
+                        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                        fw.write("\n\n================ " + time + " ================\n");
+                        fw.write(crashLog);
+                        fw.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // 结束进程
+                Process.killProcess(Process.myPid());
+                System.exit(1);
+            }
+        });
     }
 
     private void initParams() {
